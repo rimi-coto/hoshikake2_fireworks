@@ -495,10 +495,10 @@ index　＞　メインビジュアル
 
   /* imgタイトル */
   .mainvisual-title img {
-    width: 30%;  
+    width: 200px;  
     position: absolute;
-    top: 80%;
-    left: 77%;
+    top: 75%;
+    left: 72%;
     z-index: 90;
   }
 }
