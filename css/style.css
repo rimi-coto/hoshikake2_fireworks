@@ -55,11 +55,8 @@ img {
 --------------------------------------------*/
 
 .btn {
-  /* 矢印を起点とするためrelativeを指定 */
-  position: relative;
-  /* ボタンの形状 */
   background: #f5f262;
-  padding: 12px 50px 12px 18px;
+  padding: 12px 20px;
   display: inline-block;
   text-align: center;
   transition: all .2s linear;
@@ -74,49 +71,13 @@ img {
   margin-top: 20px;
 }
 
-/* hover時のボタンの色 */
+  /* hover時のボタンの色 */
 .btn:hover {
   background: #ffffff;
   border-color: #000000;
 }
 
-/* 矢印と線の形状 */
-.btn::before {
-  content: "";
-  /* 絶対配置で線の位置を決める */
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  /* 線の形状 */
-  width: 24px;
-  height: 1px;
-  background: #000000;
-}
 
-.btn::after {
-  content: '';
-  /* 絶対配置で矢印の位置を決める */
-  position: absolute;
-  top: 38.6%;
-  right: 12px;
-  /* 矢印の形状 */
-  border: 6px solid transparent;
-  border-top-width: 6px;
-  border-bottom-width: 6px;
-  border-left-color: #000000;
-  /* アニメーションの指定 */
-  transition: all .2s linear;
-}
-
-/* hover時の矢印の形状 */
-.btn:hover::before {
-  background: #000000;
-  right: 27px;
-}
-.btn:hover::after {
-  border-left-color: #000000;
-  right: 20px;
-}
 
 
 /* レスポンシブ ------------ */
@@ -124,7 +85,7 @@ img {
 @media (min-width: 520px) {
 
   .btn {
-    padding: 15px 60px 15px 30px; /* 余白＋ */
+    padding: 15px 30px; /* 余白＋ */
 
     font-size: 1rem; /* 16pxに */
   }
@@ -238,6 +199,7 @@ img {
 .header-nav li a:hover {
   background: #e7e7c5;
 }
+
 @media (min-width: 768px) {
   /* PC向けレイアウト */
   .header-nav {
@@ -259,8 +221,51 @@ img {
     background: none;
   }
 }
+/*--------------------------------------------
+header-nav ホバー時に文字切り替え
+--------------------------------------------*/
+/*表示するテキストが切り替わる*/
+.textchange{
+  /*テキストの基点とするためrelativeを指定*/
+  position: relative;
+  min-width:110px;
+  padding: 20px;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  outline: none;
+  /*アニメーションの指定*/
+  transition: all .2s;
+}
 
+.textchange span{
+  /*絶対配置でテキストの位置を決める*/
+  position: absolute;
+  left: 50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  /*アニメーションの指定*/
+  transition: all .5s;
+  /*ブロック要素にしてテキスト折り返しなし*/  
+  display: block;
+  white-space: nowrap;
+}
 
+  /*差し替わるテキストの設定*/
+.textchange span:nth-child(2){
+  opacity:0;/*透過0に*/
+  font-size: 70%;
+}
+
+  /*hoverするとテキストが入れ替わる設定*/
+.textchange:hover span:nth-child(1){
+  opacity:0;/*透過0に*/
+}
+
+.textchange:hover span:nth-child(2){
+  opacity:1;/*不透明に*/
+}
 
 /*--------------------------------------------
 各ページ上部　共通　テーマ部分 
@@ -270,9 +275,10 @@ img {
 .thema-title-en {
   font-family: 'Montserrat';
   font-size: 2rem;  /* 32px */
-  font-weight: 200;
-  letter-spacing: 0.2rem;
+  font-weight: bold;
+  letter-spacing: 0.5rem;
   margin: 0;
+  color: #e6e3e1;
 }
 
 .thema-title-ja {
@@ -397,7 +403,7 @@ h3:after {
 /* h3見出し中の強調数字 */
 h3 span.h3-no {
   font-family: 'Lobster';
-  font-size: 2rem;
+  font-size: 2.5rem;
   align-items: center;
   color: #CCC500;
 }
@@ -460,11 +466,25 @@ index　＞　メインビジュアル
   }
 
   /* 花火画像のアニメーション指定 */
-  .hanabi1-fadein {
+  .hanabi1-A-fadein {
     width: 200px;
     height: 200px;
     background: url(../img/animation_hanabi1.png) no-repeat;
-    animation: fadeIn 4s infinite;
+    animation: fadeIn 3s infinite;
+  }
+  @keyframes fadeIn {
+    0% {opacity: 0;}
+    50% {opacity: 0.5;}
+    100% {opacity: 1;}
+  }
+  .hanabi1-B-fadein {
+    width: 200px;
+    height: 200px;
+    background: url(../img/animation_hanabi1.png) no-repeat;
+    animation: fadeIn 1.5s infinite;
+    position: absolute;
+    top: 57%;
+    right: 2%;
   }
   @keyframes fadeIn {
     0% {opacity: 0;}
@@ -472,13 +492,27 @@ index　＞　メインビジュアル
     100% {opacity: 1;}
   }
 
-  .hanabi2-fadein {
+  .hanabi2-A-fadein {
     width: 150px;
     height: 150px;
     background: url(../img/animation_hanabi2.png) no-repeat;
-    animation: fadeIn2 3s infinite;
+    animation: fadeIn2 1s infinite;
     position: absolute;
-    top: 45%;
+    top: 70%;
+    left: 15%;
+  }
+  @keyframes fadeIn2 {
+    0% {opacity: 0;}
+    70% {opacity: 0.5;}
+    100% {opacity: 1;}
+  }
+  .hanabi2-B-fadein {
+    width: 150px;
+    height: 150px;
+    background: url(../img/animation_hanabi2.png) no-repeat;
+    animation: fadeIn2 2s infinite;
+    position: absolute;
+    top: 35%;
     left: 55%;
   }
   @keyframes fadeIn2 {
@@ -555,7 +589,7 @@ ul.area-list {
 
 .area-no {
   font-family: 'Montserrat';
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #CCC500;
 }
@@ -596,11 +630,20 @@ ul.area-list {
 index　＞　point　注意事項
 --------------------------------------------*/
 .point {
-  text-align: justify;
-  border: solid 1px;
-  border-radius: 15px;
-  padding: 15px;
+  text-align: center;
+  padding: 20px;
   margin-top: 80px;
+  background-color: #fff;
+  border: solid 2px solid ;
+  border-radius: 30px;
+
+}
+
+.point p {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.3rem;
+  color: #74d3f7;
 }
 
 .point a {
@@ -615,10 +658,11 @@ index　＞　point　注意事項
 }
 
 .point li {
-  list-style-type: square;
+  list-style: none;
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 8px;
+  color: #000;
 }
 
 
@@ -1108,10 +1152,10 @@ spot
 /*文字指定*/
 .spot-text .spot-no {
   display: inline-block;
-  width: 80px;
-  height: 80px;
-  line-height: 24px;
-  background-color: #79a7b8;
+  width: 90px;
+  height: 90px;
+  line-height: 28px;
+  background-color: #74d3f7;
   color: #ffffff;
   border-radius: 50%;
   font-size: 0.875rem;
@@ -1119,17 +1163,17 @@ spot
   font-weight: 500;
   padding-top: 14px;
   margin-top: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .spot-text .spot-no span {
   font-family: 'Lobster';
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #000000;
 }
 
 .spot-text h4 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #74d3f7;
   margin-top: 0px;
@@ -1137,7 +1181,7 @@ spot
 }
 
 .spot-text h4 span {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 300;
   color: #ffffff;
 }
@@ -1167,7 +1211,7 @@ spot
 /*画像変形*/
 .spot-pict img {
   border-radius: 37% 63% 37% 63% / 71% 38% 62% 29%;
-  border: 2px solid #79a7b8;
+  border: 3px solid #74d3f7;
   ; 
 }
 
